@@ -1,6 +1,8 @@
 import {PrimaryKey, Property} from "@mikro-orm/core";
 
 class Model {
+    public static readonly LIMIT = 20;
+
     @PrimaryKey({autoincrement: true})
     private id: number;
 

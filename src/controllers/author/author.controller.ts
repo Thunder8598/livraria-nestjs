@@ -1,4 +1,4 @@
-import {Body, Controller, Header, HttpException, HttpStatus, Post} from '@nestjs/common';
+import {Body, Controller, Get, Header, HttpException, HttpStatus, Post, Query} from '@nestjs/common';
 import CreateAuthorDto from "./dtos/create-author.dto";
 import AuthorService from "./author.service";
 
@@ -10,12 +10,12 @@ export class AuthorController {
     @Post()
     @Header('Access-Control-Allow-Origin', '*')
     public async create(@Body() authorDto: CreateAuthorDto) {
-        try {
-            await this.service.create(authorDto);
-        } catch (e) {
-            console.error(e);
+        await this.service.create(authorDto);
+    }
 
-            throw new HttpException(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @Get()
+    @Header('Access-Control-Allow-Origin', '*')
+    public async getAll(@Query('page') page) {
+        return await this.service.getAll(page ?? 1);
     }
 }
