@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './controllers/app.controller';
 import { AppService } from './services/app.service';
-import { BookController } from './book/book.controller';
 import { BookController } from './controllers/book/book.controller';
+import {MikroOrmModule} from "@mikro-orm/nestjs";
+import dbConfig from "./mikro-orm.config";
 
 @Module({
-  imports: [],
-  controllers: [AppController, BookController],
+  imports: [
+      MikroOrmModule.forRoot(dbConfig)
+  ],
+  controllers: [BookController],
   providers: [AppService],
 })
 export class AppModule {}
