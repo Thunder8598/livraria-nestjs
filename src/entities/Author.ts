@@ -6,7 +6,7 @@ class Author extends Model {
     @Property()
     private name: string;
 
-    @Property({columnType:"datetime"})
+    @Property({columnType: "datetime"})
     private birthday: Date;
 
     @Property()
@@ -32,8 +32,8 @@ class Author extends Model {
         return this.birthday;
     }
 
-    public setBirthday(value: Date) {
-        this.birthday = value;
+    public setBirthday(value: string) {
+        this.birthday = new Date(value);
     }
 
     public getDescription(): string {

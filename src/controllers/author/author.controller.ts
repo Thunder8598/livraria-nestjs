@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Header, HttpException, HttpStatus, Param, Post, Query} from '@nestjs/common';
+import {Body, Controller, Get, Header, HttpException, HttpStatus, Param, Post, Put, Query} from '@nestjs/common';
 import CreateAuthorDto from "./dtos/create-author.dto";
 import AuthorService from "./author.service";
 
@@ -23,5 +23,11 @@ export class AuthorController {
     @Header('Access-Control-Allow-Origin', '*')
     public async findOne(@Param('id') id) {
         return await this.service.findOne(id);
+    }
+
+    @Put(':id')
+    @Header('Access-Control-Allow-Origin', '*')
+    public async edit(@Param('id') id, @Body() authorDto: CreateAuthorDto) {
+        return await this.service.edit(id, authorDto);
     }
 }

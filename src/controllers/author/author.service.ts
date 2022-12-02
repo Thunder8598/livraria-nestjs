@@ -35,6 +35,16 @@ class AuthorService {
 
         return author;
     }
+
+    public async edit(id: number, authorDto: CreateAuthorDto) {
+        const author = await this.findOne(id);
+
+        author.setName(authorDto.name);
+        author.setBirthday(authorDto.birthday);
+        author.setDescription(authorDto.description);
+
+        await this.em.persistAndFlush(author);
+    }
 }
 
 export default AuthorService;
