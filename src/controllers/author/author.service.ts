@@ -1,4 +1,4 @@
-import {Injectable, Query} from "@nestjs/common";
+import {HttpException, HttpStatus, Injectable, Query} from "@nestjs/common";
 import CreateAuthorDto from "./dtos/create-author.dto";
 import Author from "../../entities/Author";
 import {MikroORM} from "@mikro-orm/core";
@@ -25,6 +25,15 @@ class AuthorService {
             data: authors,
             next: offset + Author.LIMIT < total ? `/api/author?page=${++page}` : null
         };
+    }
+
+    public async findOne(id: number): Promise<Author> {
+        const author = await this.em.findOne(Author, {id});
+
+        if (!author)
+            throw new HttpException("Not Found", HttpStatus.NOT_FOUND);
+
+        return author;
     }
 }
 
