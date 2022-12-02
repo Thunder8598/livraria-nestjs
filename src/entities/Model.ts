@@ -3,7 +3,7 @@ import {PrimaryKey, Property} from "@mikro-orm/core";
 class Model {
     public static readonly LIMIT = 20;
 
-    @PrimaryKey({autoincrement: true})
+    @PrimaryKey({autoincrement: true,columnType:"bigint"})
     private id: number;
 
     @Property({columnType: "datetime", onCreate: () => new Date()})
