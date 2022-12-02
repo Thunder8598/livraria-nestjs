@@ -18,9 +18,13 @@ const config: Options = {
     highlighter: new SqlHighlighter(),
     metadataProvider: TsMorphMetadataProvider,
     registerRequestContext: false,
+    allowGlobalContext:true,
     migrations: {
         path: 'dist/migrations',
         pathTs: 'src/migrations',
+    },
+    cache: {
+        enabled: false
     },
 };
 
